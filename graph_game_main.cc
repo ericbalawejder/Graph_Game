@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 
-	Network test;
+	Network network;
 	int input;
 	Stack<int> paintedSquares, neighborSquares;
 
@@ -29,8 +29,8 @@ int main()
 	cout << "-------------------------------------------------------------------------" << endl;
 	
 	//based on the input maze to make the network. Then print out the graph table
-	test.createNetwork(graph, size);	
-	test.printNetwork();
+	network.createNetwork(graph, size);	
+	network.printNetwork();
 	cout << endl;
 
 	// First Pick
@@ -46,15 +46,15 @@ int main()
 		//push any neighbors of input onto stack
 		for(int i = 1; i <= n; i++)
 		{
-	  	  	NeighborNode *tmp = test.findNeighbor(input,i);
+	  	  	NeighborNode *temp = network.findNeighbor(input,i);
 	  
-	  		if(tmp && !paintedSquares.isInStack(tmp->label))
+	  		if(temp && !paintedSquares.isInStack(temp->label))
 			{
-	      	  	neighborSquares.push(tmp->label);
+	      	  	neighborSquares.push(temp->label);
 			}
 		}
 
-		if(test.calculateMove(paintedSquares, neighborSquares, input))
+		if(network.calculateMove(paintedSquares, neighborSquares, input))
 		{
 	  		cout << "\nOpponent could beat you on next move. Pick another square to paint\n\n";
 	  		while(!paintedSquares.isEmpty()) 
@@ -76,9 +76,9 @@ int main()
 	// All other Picks
 	while((paintedSquares.size() + neighborSquares.size()) < n)
     {
-        cout<<"\nPick a square from the following numbers: ";
+        cout << "\nPick a square from the following numbers: ";
 
-		for(int i = 1; i<= n; i++)
+		for(int i = 1; i <= n; i++)
 		{
 		  	if(!paintedSquares.isInStack(i) && !neighborSquares.isInStack(i))
 		  	{
@@ -101,16 +101,16 @@ int main()
 	     	//push any neighbors of input onto stack
 	     	for(int i = 1; i <= size; i++)
 	     	{
-	       	 	NeighborNode *tmp = test.findNeighbor(input,i);
+	       	 	NeighborNode *temp = network.findNeighbor(input, i);
 	  
-	       	 	if(tmp && !neighborSquares.isInStack(tmp->label))
+	       	 	if(temp && !neighborSquares.isInStack(temp->label))
 				{
-		 		   neighborSquares.push(tmp->label);
+		 		   neighborSquares.push(temp->label);
 			   	}
 
 	     	}
 		}
 	}
 
-	cout << "\nGame Over" << endl;
+	cout << "\nGame Ended" << endl;
 }
