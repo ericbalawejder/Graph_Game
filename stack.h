@@ -31,7 +31,7 @@ class Stack
 		Type& peek();
 		Type& peekIndex(const int&);
         bool push(const Type& item);
-		bool qpush(const Type& item);
+		bool queuePush(const Type& item);
 		bool isInStack(const Type&);
 
     private:
@@ -39,4 +39,3 @@ class Stack
    
 };
 #endif
-
