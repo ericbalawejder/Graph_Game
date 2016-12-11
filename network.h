@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#include"stack.cc"
+#include"stack.h"
 
 // neighbor node for the network
 struct NeighborNode
