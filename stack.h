@@ -1,3 +1,5 @@
+// stack class in template format
+
 #include<iostream>
 #include<string>
 #include<cstdlib>
@@ -6,9 +8,6 @@
 #include<ctime>
 
 using namespace std;
-
-#define TRUE 1;
-#define FALSE 0;
 
 template<class Type>
 struct Node

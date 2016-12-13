@@ -61,6 +61,7 @@ Network::Network()
 	start = NULL;
 }
 
+// needs byte size of input array index
 void Network::createNetwork(string* graph, int& size)
 {
 	string entry;
@@ -98,7 +99,7 @@ void Network::createNetwork(string* graph, int& size)
 // print the Network
 void Network::printNetwork()
 {
-	cout << "Graph Table:" << endl;
+	cout << "\nGraph Table:" << endl;
 	BackboneNode* tempBackbone = start;
 	NeighborNode* tempNeighbor;
 	while(tempBackbone)
@@ -136,7 +137,7 @@ bool Network::inStack(int& bLabel, int& nLabel, Stack<Edge*>& pathStack)
 }
 
 // insert a new backbone, the label cannot be duplicated with existed ones
-bool Network:: insertBackbone(const int& label)
+bool Network::insertBackbone(const int& label)
 {
     // duplicated backbone label; no insertion
     if(findBackbone(label))
@@ -160,14 +161,14 @@ bool Network:: insertBackbone(const int& label)
 		BackboneNode* temp = start;
 		while(temp->nextbone)
 		{
-			temp =  temp->nextbone;
+			temp = temp->nextbone;
 		}
 		temp->nextbone = current;
 	}
 	return true;
 }
 
-bool Network:: createNeighborNode(const int& pLabel, const int& weight, const int& nLabel)
+bool Network::createNeighborNode(const int& pLabel, const int& weight, const int& nLabel)
 {
 	// if backbone with plabel does not exsist, create it
 	BackboneNode* backbone = findBackbone(pLabel);
@@ -216,7 +217,7 @@ bool Network:: createNeighborNode(const int& pLabel, const int& weight, const in
 	return true;
 }
 
-BackboneNode* Network:: findBackbone(const int& label)
+BackboneNode* Network::findBackbone(const int& label)
 {
 	if(!start)
 	{
@@ -231,7 +232,7 @@ BackboneNode* Network:: findBackbone(const int& label)
 	return temp;
 }
 
-NeighborNode* Network:: findNeighbor(const int& plabel, const int& nlabel)
+NeighborNode* Network::findNeighbor(const int& plabel, const int& nlabel)
 {
 	if(!start)
 	{
@@ -254,10 +255,10 @@ NeighborNode* Network:: findNeighbor(const int& plabel, const int& nlabel)
 	return firstNeighbor;
 }
 
-bool Network:: calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
+bool Network::calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 {
 	// stacks for deep copy
-	Stack<int> stackP, stackNB;
+	Stack<int> stackPainted, stackNB;
 	// hold squares remaining
   	Stack<int> remaining;
 
@@ -266,7 +267,7 @@ bool Network:: calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 	 	// deep copy painted
 		for(int k = 0; k < painted.size(); k++)
 		{
-	   	 	stackP.push(painted.peekIndex(k));
+	   	 	stackPainted.push(painted.peekIndex(k));
 		}
 
 	 	// deep copy neighbor	 
@@ -276,11 +277,11 @@ bool Network:: calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
    		}
 
 	 	// if i is not in either stack, push onto stackP	 
-	 	if(!stackP.isInStack(i) && !stackNB.isInStack(i))
+	 	if(!stackPainted.isInStack(i) && !stackNB.isInStack(i))
 		{
 
             // push input onto stack
-	    	stackP.push(i);
+	    	stackPainted.push(i);
 
 	   	 	// push any neighbors of i onto stack
 	   	 	for(int j = 1; j <= n; j++)
@@ -288,7 +289,7 @@ bool Network:: calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 
 	    		NeighborNode *temp = findNeighbor(i,j);
 
-	     	   	if(temp && !stackP.isInStack(temp->label))
+	     	   	if(temp && !stackPainted.isInStack(temp->label))
 			   	{
 	        		stackNB.push(temp->label);
 			   	}
@@ -298,7 +299,7 @@ bool Network:: calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 	   	 	// push any squares not in p or nb stack onto remaining stack
 	   	 	for(int j = 1; j <= n; j++)
 			{
-	     		if(!stackP.isInStack(j) && !stackNB.isInStack(j)) 
+	     		if(!stackPainted.isInStack(j) && !stackNB.isInStack(j)) 
 			   	{
 					remaining.push(j);
 			   	}
@@ -320,9 +321,9 @@ bool Network:: calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 	   		}  
    		}
 		
-	 	if(!stackP.isEmpty()) 
+	 	if(!stackPainted.isEmpty()) 
 	 	{
-			stackP.pop();
+			stackPainted.pop();
 	 	}
 		if(!stackNB.isEmpty())
 		{ 

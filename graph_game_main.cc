@@ -17,27 +17,24 @@ int main()
 	 3rd character is node weight. All weights are 1.
     */
 	
-	string graph[] = 
-		{"121", "141", "211","231","241","321","341","351","361","411","421","431","451","531","541","561","571","631","651","671","751","761"};
+	string graph[] = {"121", "141", "211", "231", "241", "321", "341", "351", "361", "411", 
+		"421", "431", "451", "531", "541", "561", "571", "631", "651", "671", "751", "761"};
+	
+	// 528 / 24 = 22 -> size
 	int size = sizeof(graph) / sizeof(graph[0]);
-	cout << sizeof(graph) << endl;
-	cout << sizeof(graph[0]) << endl;
-	cout << size << endl;
     int n = 7;
-    bool testPick = true;
-	
-	cout << "-------------------------------------------------------------------------" << endl;
-	
-	//based on the input maze to make the network. Then print out the graph table
+    bool loopControl = true;
+		
+	// based on the input maze to make the network. 
 	network.createNetwork(graph, size);	
+	// print out the graph table
 	network.printNetwork();
-	cout << endl;
 
 	// First Pick
-	while(testPick)
+	while(loopControl)
 	{
  
-		cout << "\nPick a square between 1-7 to paint." << endl;;
+		cout << "Choose a square between 1-7 to paint." << endl;;
 		cin >> input;
 
 		//put push input onto stack
@@ -68,9 +65,8 @@ int main()
 		}
 		else
 		{
-	  		testPick = false;
+	  		loopControl = false;
 	  	}
- 	
 	}
 
 	// All other Picks
@@ -95,10 +91,10 @@ int main()
 	   	}
 	   	else
 	   	{
-	   		//put push input onto stack
+	   		// push input onto stack
 	     	paintedSquares.push(input);
 
-	     	//push any neighbors of input onto stack
+	     	// push any neighbors of input onto stack
 	     	for(int i = 1; i <= size; i++)
 	     	{
 	       	 	NeighborNode *temp = network.findNeighbor(input, i);
@@ -113,4 +109,5 @@ int main()
 	}
 
 	cout << "\nGame Ended" << endl;
+	return 0;
 }
