@@ -110,7 +110,7 @@ void Network::printNetwork()
 		{
 		  	//cout << tempNeighbor->label << " ";
 			//cout << "( with weight: " << tempNeighbor->weight << ")  ";
-		    cout << " -> " << tempNeighbor->label << "  weight(" << tempNeighbor->weight << ")";
+		    cout << " -> " << tempNeighbor->label;
 			tempNeighbor = tempNeighbor->neighbor;
 		}
 		cout << endl;
@@ -276,24 +276,21 @@ bool Network::calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 	   		stackNB.push(neighbor.peekIndex(k));
    		}
 
-	 	// if i is not in either stack, push onto stackP	 
+	 	// if i is not in either stack, push onto stackPainted	 
 	 	if(!stackPainted.isInStack(i) && !stackNB.isInStack(i))
 		{
-
             // push input onto stack
 	    	stackPainted.push(i);
 
 	   	 	// push any neighbors of i onto stack
 	   	 	for(int j = 1; j <= n; j++)
 	   	 	{
-
 	    		NeighborNode *temp = findNeighbor(i,j);
 
 	     	   	if(temp && !stackPainted.isInStack(temp->label))
 			   	{
 	        		stackNB.push(temp->label);
 			   	}
-
 		   	}
 	 
 	   	 	// push any squares not in p or nb stack onto remaining stack
@@ -305,14 +302,13 @@ bool Network::calculateMove(Stack<int>& painted, Stack<int>& neighbor, int& n)
 			   	}
 		   	}
 
-	   	 	// if any of squares in remaining are not neighbors retun false
+	   	 	// if any of squares in remaining are not neighbors return false
 	   		for(int j = 0; j < remaining.size(); j++)
-	   	 	{
-	     	   	int num = remaining.peekIndex(j);
-				
+	   	 	{				
 	     		for(int k = 1; k <= remaining.size(); k++)
 		 	   	{
-	     			NeighborNode *temp = findNeighbor(j,k);
+	     			NeighborNode *temp = findNeighbor(j, k);
+					
 	       			if(temp)
 					{ 
 						return false;

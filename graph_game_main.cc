@@ -7,7 +7,7 @@ int main()
 {
 
 	Network network;
-	int input;
+	int choice;
 	Stack<int> paintedSquares, neighborSquares;
 
 	/*
@@ -30,20 +30,20 @@ int main()
 	// print out the graph table
 	network.printNetwork();
 
-	// First Pick
+	// first Pick
 	while(loopControl)
 	{
  
 		cout << "Choose a square between 1-7 to paint." << endl;;
-		cin >> input;
+		cin >> choice;
 
-		//put push input onto stack
-		paintedSquares.push(input);
+		// put push input onto stack
+		paintedSquares.push(choice);
 
-		//push any neighbors of input onto stack
+		// push any neighbors of input onto stack
 		for(int i = 1; i <= n; i++)
 		{
-	  	  	NeighborNode *temp = network.findNeighbor(input,i);
+	  	  	NeighborNode *temp = network.findNeighbor(choice, i);
 	  
 	  		if(temp && !paintedSquares.isInStack(temp->label))
 			{
@@ -51,9 +51,10 @@ int main()
 			}
 		}
 
-		if(network.calculateMove(paintedSquares, neighborSquares, input))
+		if (network.calculateMove(paintedSquares, neighborSquares, choice))
 		{
-	  		cout << "\nOpponent could beat you on next move. Pick another square to paint\n\n";
+	  		cout << "\nThe opponent can beat you on next move."
+						" Pick another square to paint\n\n";
 	  		while(!paintedSquares.isEmpty()) 
 			{
 				paintedSquares.pop();
@@ -83,21 +84,21 @@ int main()
 		}
 		cout << endl;
     
-		cin >> input;
+		cin >> choice;
 
-		if(paintedSquares.isInStack(input))
+		if(paintedSquares.isInStack(choice))
 		{
-		   cout << "\nInvalid choice. Please pick again\n";
+		   cout << "\nAlready chosen. Select again.\n";
 	   	}
 	   	else
 	   	{
 	   		// push input onto stack
-	     	paintedSquares.push(input);
+	     	paintedSquares.push(choice);
 
 	     	// push any neighbors of input onto stack
 	     	for(int i = 1; i <= size; i++)
 	     	{
-	       	 	NeighborNode *temp = network.findNeighbor(input, i);
+	       	 	NeighborNode *temp = network.findNeighbor(choice, i);
 	  
 	       	 	if(temp && !neighborSquares.isInStack(temp->label))
 				{
