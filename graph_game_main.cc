@@ -1,22 +1,22 @@
-#include"network.h"
+#include "network.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-
+	// create network
 	Network network;
 	int choice;
+	// create two int stacks
 	Stack<int> paintedSquares, neighborSquares;
 
-	/*
-	 3 character code			  
-	 1st character is backbone label. Values from 1-7					  
-	 2nd character is neighbor label. Values from 1-7	
-	 3rd character is node weight. All weights are 1.
-    */
-	
+	// three character code	for graph table		  
+	// first character is backbone label. Values from 1-7					  
+	// second character is neighbor label. Values from 1-7	
+	// third character is node weight. All weights = 1.
+
+	// array to hold graph table encoding
 	string graph[] = {"121", "141", "211", "231", "241", "321", "341", "351", "361", "411", 
 		"421", "431", "451", "531", "541", "561", "571", "631", "651", "671", "751", "761"};
 	
@@ -25,12 +25,12 @@ int main()
     int n = 7;
     bool loopControl = true;
 		
-	// based on the input maze to make the network. 
+	// based graph game picture to make the network. 
 	network.createNetwork(graph, size);	
 	// print out the graph table
 	network.printNetwork();
 
-	// first Pick
+	// first choice
 	while(loopControl)
 	{
  
@@ -70,7 +70,7 @@ int main()
 	  	}
 	}
 
-	// All other Picks
+	// All other selections
 	while((paintedSquares.size() + neighborSquares.size()) < n)
     {
         cout << "\nPick a square from the following numbers: ";

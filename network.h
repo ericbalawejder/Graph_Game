@@ -113,7 +113,7 @@ void Network::printNetwork()
 		    cout << " -> " << tempNeighbor->label;
 			tempNeighbor = tempNeighbor->neighbor;
 		}
-		cout << endl;
+		cout << endl << "-------------------------" << endl;
 		tempBackbone = tempBackbone->nextbone;
 	}
 	cout << endl;
@@ -190,7 +190,7 @@ bool Network::createNeighborNode(const int& pLabel, const int& weight, const int
 	// check to make sure you do not insert neighbor twice
 	if(findNeighbor(pLabel, nLabel))
 	{
-		cout << "\nErr: Cannot insert neighbor. It already exists" << endl;
+		cout << "\nError: Cannot insert neighbor. It already exists" << endl;
 		return false;
 	}
 
