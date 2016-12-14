@@ -34,10 +34,18 @@ int main()
 	while(loopControl)
 	{
  
-		cout << "Choose a square between 1-7 to paint." << endl;;
+		cout << "Given squares between 1-7 to paint, picking square 3 " 
+			"will always allow you to win." << endl;;
 		cin >> choice;
+		
+		/**if (choice == 3)
+		{
+			cout << "You win!" << endl;
+			loopControl = false;
+			return 0;
+		}**/
 
-		// put push input onto stack
+		// push input onto stack
 		paintedSquares.push(choice);
 
 		// push any neighbors of input onto stack
@@ -109,6 +117,6 @@ int main()
 		}
 	}
 
-	cout << "\nGame Ended" << endl;
+	cout << "\nYou win" << endl;
 	return 0;
 }
