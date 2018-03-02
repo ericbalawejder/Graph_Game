@@ -1,5 +1,3 @@
-// stack class in template format
-
 #include<iostream>
 #include<string>
 #include<cstdlib>
@@ -9,6 +7,7 @@
 
 using namespace std;
 
+// Stack class in template format.
 template<class Type>
 struct Node
 {
@@ -22,27 +21,27 @@ class Stack
     public:
         Stack();
         bool isEmpty();
-		int size();
+        int size();
         Type& pop();
-		Type& peek();
-		Type& peekIndex(const int&);
+        Type& peek();
+        Type& peekIndex(const int&);
         bool push(const Type& item);
-		bool queuePush(const Type& item);
-		bool isInStack(const Type&);
+        bool queuePush(const Type& item);
+        bool isInStack(const Type&);
 
     private:
         Node<Type>* top;
    
 };
 
-// constructor
+// Constructor
 template<class Type>
 Stack<Type>::Stack()
 {
     top = NULL;
 }
 
-// return true if the stack is empty
+// Return true if the stack is empty
 template<class Type>
 bool Stack<Type>::isEmpty()
 {
@@ -50,7 +49,7 @@ bool Stack<Type>::isEmpty()
 }
 
 template<class Type>
-// pre-condition: Stack cannot be empty
+// Pre-condition: Stack cannot be empty
 Type& Stack<Type>::pop()
 {
     if(!isEmpty())
@@ -67,12 +66,12 @@ Type& Stack<Type>::pop()
      }
 }
 
-// return the top value of the stack
-// precondition: stack must not be empty
+// Return the top value of the stack
+// Precondition: stack must not be empty
 template<class Type>
 Type& Stack<Type>::peek()
 {
-	return top->value;
+    return top->value;
 }
 
 // FILO, built stack serves as stack
@@ -84,9 +83,9 @@ bool Stack<Type>::push(const Type& item)
     current -> next = NULL;
    
     if(isEmpty())
-	{
+    {
          top = current;
-	}
+    }
     else
     {
         current ->next = top;
@@ -100,72 +99,72 @@ bool Stack<Type>::push(const Type& item)
 template<class Type>
 bool Stack<Type>::queuePush(const Type& item)
 {
-	Node<Type>* current = new Node<Type>;
-	current -> value = item;
-	current -> next = NULL;
+    Node<Type>* current = new Node<Type>;
+    current -> value = item;
+    current -> next = NULL;
 
-	if(isEmpty())
-	{
-		top = current;
-	}
-	else
-	{
-		Node<Type>* temp = top;
-		while(temp->next)
-		{
-			temp = temp->next;
-		}
-		temp->next = current;
-	}
-	return true;
+    if(isEmpty())
+    {
+        top = current;
+    }
+    else
+    {
+        Node<Type>* temp = top;
+        while(temp->next)
+        {
+            temp = temp->next;
+        }
+        temp->next = current;
+    }
+    return true;
 }
 
-// return true when the item is in the stack
+// Return true when the item is in the stack
 template<class Type>
 bool Stack<Type>::isInStack(const Type& item)
 {
-	Node<Type>* current = top;
-	while(current)
-	{
-		if(current->value == item)
-		{
-			return true;
-		}
-		current = current->next;
-	}
-	return false;
+    Node<Type>* current = top;
+    while(current)
+    {
+        if(current->value == item)
+        {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
 }
 
-// return the index item of the stack
+// Return the index item of the stack
 template<class Type>
 Type& Stack<Type>::peekIndex(const int& index)
 {
-	// if index is out bound, stop program
-	if(index>size())
-	{
-		cout << "\nError:out of bound" << endl;
-		exit(0);
-	}
-	Node<Type>* current = top;
-	
-	for(int i = 1; i<index; ++i)
-	{
-		current = current->next;
-	}
+    // If index is out bound, stop program
+    if(index>size())
+    {
+        cout << "\nError:out of bound" << endl;
+        exit(0);
+    }
+    Node<Type>* current = top;
 
-	return current->value;
+    for(int i = 1; i<index; ++i)
+    {
+        current = current->next;
+    }
+
+    return current->value;
 }
 
-// return the size of the stack
+// Return the size of the stack
 template<class Type>
 int Stack<Type>::size()
 {
-	int count = 0;
-	Node<Type>* temp = top;
-	while(temp)
-	{
-		temp = temp->next;
-		++count;
-	}
-	return count;
+    int count = 0;
+    Node<Type>* temp = top;
+    while(temp)
+    {
+        temp = temp->next;
+        ++count;
+    }
+    return count;
 }
