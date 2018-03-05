@@ -9,3 +9,4 @@ To run:
 ```shell
 $ ./graph_game_main
 ```
+![Graph_game](graph_game.png)
